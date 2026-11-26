@@ -1,0 +1,8 @@
+game_title,steam_appid,parent_company,rule,reason
+Onimusha: Way of the Sword,2638890,Capcom,D1,PC launch 2026-09-03 is after sample end (needs 180 days of history)
+Monster Hunter: World,582010,Capcom,D2(d),PC 2018-08-08; console 2018-01-26 (verify)
+Monster Hunter Rise,1446780,Capcom,D2(d),PC 2022-01-12; Switch 2021-03-26 (verify)
+Street Fighter 30th Anniversary Collection,586200,Capcom,D2(b),Collection of previously released games
+The Great Ace Attorney Chronicles,1158850,Capcom,D2(b),Collection of two earlier Japan-only 3DS games
+Capcom Fighting Collection,1685750,Capcom,D2(b),Collection of previously released games
+Dead Rising Deluxe Remaster,2527390,Capcom,D2(b),Remaster of 2006 game
