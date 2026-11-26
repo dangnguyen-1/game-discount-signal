@@ -1,0 +1,4 @@
+parent_company,ticker,exchange,country,currency,benchmark_index,listed_from,listed_to,steam_publisher_names,label_start,label_end,notes
+Capcom,9697.T,Tokyo,Japan,JPY,^N225,2015-01-01,,CAPCOM Co. Ltd.,2015-01-01,,Listed throughout sample; listed_from set to stock data start. Confirm exact Steam publisher string in Phase 2.
+Ubisoft,UBI.PA,Euronext Paris,France,EUR,^FCHI,2015-01-01,,Ubisoft,2015-01-01,,Listed throughout sample. Several titles launched on Epic or Ubisoft Connect first (2019-2022); flag per D3.
+Square Enix,9684.T,Tokyo,Japan,JPY,^N225,2015-01-01,,Square Enix,2015-01-01,,Listed throughout sample. Western studios (Eidos/Crystal Dynamics) sold to Embracer in 2022; their games launched before the sale stay with Square Enix.
