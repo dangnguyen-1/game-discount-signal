@@ -221,3 +221,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project
+.env
+.venv/
+data/raw/
+data/interim/
