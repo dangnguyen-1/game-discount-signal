@@ -23,7 +23,7 @@ DOCS = ROOT / "docs"
 
 # --- Sample period (D1, D13) ---
 SAMPLE_START = date(2016, 1, 1)
-DATA_COLLECTION_DATE = None  # set to the date you download price histories, e.g. date(2026, 9, 7)
+DATA_COLLECTION_DATE = date(2026, 11, 26)
 MIN_HISTORY_DAYS = 180
 HOLDOUT_START = date(2025, 1, 1)
 
@@ -74,7 +74,7 @@ BOOTSTRAP_RUNS = 10_000
 RANDOM_SEED = 42
 
 # --- Data collection ---
-REQUEST_DELAY_SECONDS = 1.0
+REQUEST_DELAY_SECONDS = 3.5
 
 # --- Pilot publishers (build order: start small) ---
 PILOT_PUBLISHERS = ["Capcom", "Ubisoft", "Square Enix"]
