@@ -1,0 +1,1 @@
+# game-discount-signal
