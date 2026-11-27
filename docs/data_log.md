@@ -26,3 +26,6 @@
 - Zero-volume rows dropped: Yahoo pads exchange holidays (Tokyo: 24 rows, mostly 2017-2018 Japanese holidays; Paris: 2019-12-25) and the Ubisoft trading suspension (2025-11-14 to 11-20) with a repeated price at zero volume. The return across a closure is recorded on the day trading resumes (Ubisoft: 2025-11-21).
 - Index returns are computed over the stock's own trading days, so both returns always cover the same interval.
 - Largest moves checked against news: Ubisoft 2026-01-22 (-40%, restructuring and six cancellations), 2024-10-04 (+34%, buyout reports); Capcom 2024-08-05/06 (global market crash and rebound, Nikkei -12%/+10%).
+
+## Earnings announcement dates
+- Capcom: 44 announcements (2016-01-28 to 2026-10-27), collected from Capcom IR calendar archive pages and press releases (capcom.co.jp blocks scripts, so dates were gathered via web search of those pages). Releases came after the Tokyo close (15:20 JST observed) before 2024-11-05; the 8 later releases need their time checked against the 15:30 close. Consistent with returns: the three largest Capcom up-days (2019-08-02, 2023-07-27, 2026-07-29) each follow a Q1 release by one trading day.
