@@ -227,3 +227,4 @@ __marimo__/
 .venv/
 data/raw/
 data/interim/
+data/processed/daily_prices.csv
