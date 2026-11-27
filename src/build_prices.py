@@ -27,12 +27,14 @@ import pandas as pd
 
 import config
 
+from src.fetch_itad import history_path
+
 STORE_TZ = "America/Los_Angeles"
 
 
-def load_log(itad_id):
+def load_log(itad_id, shop="steam"):
     """Cleaned ITAD history log: local store date, price, regular. Raw file is not modified."""
-    entries = json.loads((config.RAW_ITAD / f"{itad_id}.json").read_text())
+    entries = json.loads(history_path(itad_id, shop).read_text())
     log = pd.DataFrame({
         "ts": [pd.Timestamp(e["timestamp"]).tz_convert("UTC") for e in entries],
         "price": [e["deal"]["price"]["amount"] for e in entries],
@@ -77,7 +79,8 @@ def load_overrides():
 
 
 def build_game(g, publisher, overrides, last_day):
-    log = load_log(g["itad_id"])
+    shop = g.get("reference_shop") if pd.notna(g.get("reference_shop")) else "steam"
+    log = load_log(g["itad_id"], shop)
     launch = pd.Timestamp(g["pc_launch_date"]).date()
     flags = []
 
