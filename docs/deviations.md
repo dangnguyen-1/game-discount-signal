@@ -21,3 +21,10 @@ Primary specifications unchanged. Added:
 - Event-level aggregation: games sharing the same earnings announcement are averaged into one observation (abn_90 averaged; one CAR_E per announcement).
 - Norm-depth filter: drop games with n_norm_90 < 5.
 - Pilot note: with 3 publishers, publisher-clustered inference (D10) is not reliable; pilot results are reported as descriptive.
+
+## 2026-11-27: D4 and D10 for games not on Steam at launch, before any abnormal returns were computed
+- Issue: 16 games (15 Ubisoft, Stranger of Paradise) launched on the Ubisoft Store or Epic, so no Steam reviews exist for their first 30/90 days after PC launch.
+- reviews_pos (D10): use share positive in the first 90 days after Steam release (reviews_pos_steam), flagged; robustness check drops these games.
+- size / tentpole (D4): D4(a) not applied to these games; tentpole status from D4(b) (named as a key title in the publisher's earnings materials) only. D4(a) quartiles computed among Steam-launch games.
+- log(size) control (D10): missing-value indicator for these games.
+- Also noted: Anno 1800 was pulled from Steam sale before launch; its launch-window reviews come only from Steam pre-orders, so its size understates launch demand (flagged).
