@@ -28,3 +28,4 @@ Primary specifications unchanged. Added:
 - size / tentpole (D4): D4(a) not applied to these games; tentpole status from D4(b) (named as a key title in the publisher's earnings materials) only. D4(a) quartiles computed among Steam-launch games.
 - log(size) control (D10): missing-value indicator for these games.
 - Also noted: Anno 1800 was pulled from Steam sale before launch; its launch-window reviews come only from Steam pre-orders, so its size understates launch demand (flagged).
+- Correction (2026-11-27): the entry above should read 15 games (14 Ubisoft, Stranger of Paradise), not 16. Anno 1800 is not late to Steam (its Steam page existed at launch); it is flagged separately.

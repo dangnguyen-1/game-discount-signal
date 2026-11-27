@@ -4,8 +4,9 @@ Phase 6: event table, one row per game.
 Usage, from the repo root:
     python -m src.build_events
 
-Inputs:  data/processed/game_prices.csv, data/processed/daily_prices.csv,
-         data/manual/earnings_<publisher>.csv, data/interim/returns.csv
+Inputs:  data/processed/game_prices.csv, data/processed/daily_prices.csv, data/processed/reviews.csv,
+         data/manual/earnings_<publisher>.csv, data/interim/returns.csv,
+         data/manual/tentpole_key_titles.csv (optional, D4(b))
 Output:  data/processed/events.csv
 
 Rules (docs/preregistration.md, with logged deviations):
@@ -15,6 +16,11 @@ Rules (docs/preregistration.md, with logged deviations):
   D7      earnings event: first scheduled announcement more than 90 days after PC launch.
   D9      day 0 for non-US publishers: first trading day strictly after the calendar date.
           Earnings released after the close: first trading day strictly after the release date.
+  D4      tentpole = (a) 30-day review count in the top quartile of the publisher's games launched in
+          the previous 3 years (earlier games only; fewer than 4 -> all publishers), or (b) named as a key
+          title in earnings materials. Late-to-Steam games: (b) only (deviation 2026-11-27).
+  D10     reviews_pos by day 90; late-to-Steam games use their first 90 days on Steam (flagged);
+          log_size with a missing-value indicator for late-to-Steam games.
 """
 
 from datetime import timedelta
@@ -33,6 +39,13 @@ def load_inputs():
     returns = pd.read_csv(config.INTERIM / "returns.csv", parse_dates=["date"])
     earnings = pd.concat([pd.read_csv(p, parse_dates=["announcement_date"])
                           for p in sorted(config.MANUAL.glob("earnings_*.csv"))], ignore_index=True)
+    reviews = pd.read_csv(config.PROCESSED / "reviews.csv")
+    keep = ["steam_appid", "size", "reviews_pos", "reviews_pos_steam", "late_to_steam"]
+    games = games.merge(reviews[[c for c in keep if c in reviews.columns]], on="steam_appid", how="left")
+    games["late_to_steam"] = games["late_to_steam"].fillna(False).astype(bool)
+    key_path = config.MANUAL / "tentpole_key_titles.csv"
+    key = pd.read_csv(key_path) if key_path.exists() else pd.DataFrame(columns=["steam_appid", "key_title"])
+    games = games.merge(key[["steam_appid", "key_title"]], on="steam_appid", how="left")
     if "event_type" not in earnings.columns:
         earnings["event_type"] = "scheduled"
     earnings["event_type"] = earnings["event_type"].fillna("scheduled")
@@ -47,6 +60,26 @@ def cumulative_max_depth(daily):
         depth = g["depth"].where(g["day"] > config.LAUNCH_DISCOUNT_DAYS, 0.0)
         out[appid] = depth.fillna(0.0).cummax().to_numpy()
     return out
+
+
+def tentpole_by_size(games, g):
+    """D4(a): top quartile of 30-day reviews among earlier games in the previous 3 years."""
+    if g["late_to_steam"] or pd.isna(g["size"]):
+        return None, "not_applied"
+    lo = g["pc_launch_date"] - pd.DateOffset(years=config.TENTPOLE_LOOKBACK_YEARS)
+    window = games[(games["pc_launch_date"] < g["pc_launch_date"]) & (games["pc_launch_date"] >= lo) &
+                   (~games["late_to_steam"]) & games["size"].notna()]
+    own = window[window["publisher"] == g["publisher"]]
+    pool, source = (own, "own") if len(own) >= config.MIN_TENTPOLE_GAMES else (window, "pooled")
+    if len(pool) == 0:
+        return None, "no_earlier_games"
+    return bool(g["size"] >= pool["size"].quantile(config.TENTPOLE_QUANTILE)), source
+
+
+def key_title(value):
+    if pd.isna(value):
+        return None
+    return str(value).strip().lower() in ("yes", "true", "1", "y")
 
 
 def norm_pool(games, g):
@@ -160,7 +193,32 @@ def main():
         if pd.notna(gap) and abs(gap) <= 10:
             flags.append("discount_within_10_tdays_of_earnings")
 
-        row["tentpole"] = None     # D4: filled once first-30-day Steam reviews are collected
+        # D4: tentpole
+        by_size, size_source = tentpole_by_size(games, g)
+        by_key = key_title(g.get("key_title"))
+        row["tentpole_a"], row["tentpole_a_pool"], row["tentpole_b"] = by_size, size_source, by_key
+        if by_size is True or by_key is True:
+            row["tentpole"] = True
+        elif g["late_to_steam"]:
+            row["tentpole"] = False if by_key is False else None      # (b) is the only route
+        elif by_size is False:
+            row["tentpole"] = False   # (b) not yet checked for Steam-launch games: treated as not key
+        else:
+            row["tentpole"] = None    # no earlier games for (a), (b) unknown
+        if row["tentpole"] is None:
+            flags.append("tentpole_unknown_needs_D4b")
+
+        # D10: review controls
+        row["late_to_steam"] = g["late_to_steam"]
+        if g["late_to_steam"]:
+            row["reviews_pos"] = g.get("reviews_pos_steam")
+            row["log_size"], row["size_missing"] = np.nan, True
+            flags.append("reviews_pos_from_steam_window")
+        else:
+            row["reviews_pos"] = g["reviews_pos"]
+            row["log_size"] = np.log(g["size"]) if pd.notna(g["size"]) and g["size"] > 0 else np.nan
+            row["size_missing"] = pd.isna(row["log_size"])
+        row["size"] = g["size"]
         row["flags"] = "; ".join(flags)
         rows.append(row)
 
@@ -175,7 +233,12 @@ def main():
     print(main_sample.groupby("publisher").agg(
         games=("game_title", "size"), own_norm=("norm_source", lambda s: (s == "own").sum()),
         early_cut_rt=("early_cut_rt", "sum"), early_cut=("early_cut", "sum"),
+        tentpole=("tentpole", lambda s: (s == True).sum()),
+        tentpole_unknown=("tentpole", lambda s: s.isna().sum()),
         median_abn_90=("abn_90", "median")).round(3).to_string())
+    tp = events[["publisher", "game_title", "size", "tentpole_a", "tentpole_a_pool", "tentpole_b",
+                 "tentpole", "reviews_pos", "late_to_steam"]]
+    print("\nTentpole and review controls:\n" + tp.round(3).to_string(index=False))
     show = events[["publisher", "game_title", "max_depth_90", "norm_90", "abn_90", "first_cut_day",
                    "early_cut_rt", "day0_discount", "earnings_date", "day0_earnings", "flags"]].copy()
     print("\n" + show.round(2).to_string(index=False))
