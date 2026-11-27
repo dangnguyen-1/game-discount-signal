@@ -10,3 +10,13 @@ date,phase,variant,description,result
 2026-11-27,Q1,leave_out_square_enix,Drop square_enix,coef=0.1788; se=0.0895; p=0.046; n=40
 2026-11-27,Q1,leave_out_ubisoft,Drop ubisoft,coef=0.1061; se=0.0767; p=0.167; n=37
 2026-11-27,Q1,publisher_block_bootstrap,"Exact, 27 draws",coef=nan; se=nan; p=nan; n=65
+2026-11-27,Q2,primary | A: early-cut tentpole,Mean CARs by group,n=22; CAR_D_0_10=-0.0310 (p=0.045); CAR_E=0.0326 (p=0.091)
+2026-11-27,Q2,"primary | B: early cut, not tentpole",Mean CARs by group,n=21; CAR_D_0_10=-0.0051 (p=0.675); CAR_E=0.0187 (p=0.248)
+2026-11-27,Q2,primary | C: no early cut,Mean CARs by group,n=23; CAR_D_0_10=-0.0269 (p=0.028); CAR_E=-0.0169 (p=0.294)
+2026-11-27,Q2,strict_flag | A: early-cut tentpole,Mean CARs by group,n=18; CAR_D_0_10=-0.0290 (p=0.066); CAR_E=0.0198 (p=0.353)
+2026-11-27,Q2,"strict_flag | B: early cut, not tentpole",Mean CARs by group,n=17; CAR_D_0_10=-0.0067 (p=0.607); CAR_E=0.0144 (p=0.461)
+2026-11-27,Q2,strict_flag | C: no early cut,Mean CARs by group,n=31; CAR_D_0_10=-0.0249 (p=0.035); CAR_E=0.0039 (p=0.792)
+2026-11-27,Q2,excl_near_earnings | A: early-cut tentpole,Mean CARs by group,n=22; CAR_D_0_10=-0.0310 (p=0.045); CAR_E=0.0326 (p=0.091)
+2026-11-27,Q2,"excl_near_earnings | B: early cut, not tentpole",Mean CARs by group,n=20; CAR_D_0_10=-0.0095 (p=0.426); CAR_E=0.0164 (p=0.329)
+2026-11-27,Q2,excl_near_earnings | C: no early cut,Mean CARs by group,n=18; CAR_D_0_10=-0.0175 (p=0.213); CAR_E=-0.0041 (p=0.822)
+2026-11-27,Q2,CAR_D_0_10 ~ cut_vs_norm (early cuts),"Early cuts, publisher FE, HC1",coef=-0.0196; se=0.1096; p=0.858; n=43
