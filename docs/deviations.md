@@ -29,3 +29,8 @@ Primary specifications unchanged. Added:
 - log(size) control (D10): missing-value indicator for these games.
 - Also noted: Anno 1800 was pulled from Steam sale before launch; its launch-window reviews come only from Steam pre-orders, so its size understates launch demand (flagged).
 - Correction (2026-11-27): the entry above should read 15 games (14 Ubisoft, Stranger of Paradise), not 16. Anno 1800 is not late to Steam (its Steam page existed at launch); it is flagged separately.
+
+## 2026-11-27: Operational rule for D4(b), set before any abnormal returns were computed
+- D4(b) applied to all games, as D4 is written ("either" criterion), not only to late-to-Steam games.
+- Rule: a game is a key title if a results release published before its PC launch labels it AAA, or lists it in the top tier ("big brands", "major releases", "large game") of the fiscal year's line-up. A mention in a full release schedule or a lower tier (e.g. "long-lasting Live games") does not count. Renamed projects count (e.g. Gods & Monsters = Immortals Fenyx Rising).
+- Ubisoft result: 19 of 28 games qualify, so tentpole (a or b) covers about two-thirds of Ubisoft games. Robustness check added: tentpole by D4(a) only.

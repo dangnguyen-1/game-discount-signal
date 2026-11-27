@@ -1,16 +1,32 @@
 publisher,game_title,steam_appid,key_title,source,notes
-square_enix,Stranger of Paradise Final Fantasy Origin,1358700,,,
-ubisoft,Tom Clancy's The Division 2,2221490,,,
-ubisoft,Tom Clancy's Ghost Recon Breakpoint,2231380,,,
-ubisoft,Watch Dogs: Legion,2239550,,,
-ubisoft,Assassin's Creed Valhalla,2208920,,,
-ubisoft,Immortals Fenyx Rising,2221920,,,
-ubisoft,Far Cry 6,2369390,,,
-ubisoft,Riders Republic,2290180,,,
-ubisoft,Tom Clancy's Rainbow Six Extraction,2379390,,,
-ubisoft,The Crew Motorfest,2698940,,,
-ubisoft,Assassin's Creed Mirage,3035570,,,
-ubisoft,Avatar: Frontiers of Pandora,2840770,,,
-ubisoft,Prince of Persia: The Lost Crown,2751000,,,
-ubisoft,Skull and Bones,2853730,,,
-ubisoft,Star Wars Outlaws,2842040,,,
+ubisoft,Tom Clancy's The Division,365590,yes,AMF filing 2015-05-12 (FY2014-15 results): FY2015-16 line-up,Named as 'a new high-potential creation'; released in FY2015-16 after a delay
+ubisoft,Far Cry Primal,371660,yes,AMF filing 2015-05-12 (FY2014-15 results): FY2015-16 line-up,"Listed as 'another triple-A title that has not yet been announced' (announced Oct 2015, before launch); post-launch release counts it among FY2015-16's AAA titles"
+ubisoft,Trackmania Turbo,375900,no,,Not named among AAA/major releases
+ubisoft,Watch Dogs 2,447040,yes,AMF filing 2016-02-11 (Q3 FY2015-16 release): FY2016-17 line-up named,'next instalment of Watchdogs' in high-quality line-up
+ubisoft,Steep,460920,yes,AMF filing 2016-02-11 (Q3 FY2015-16 release),"Inferred: FY2016-17 line-up names 'a new high-potential AAA brand with strong digital live services' besides For Honor, South Park, Wildlands and Watch Dogs; Steep (new IP, revealed June 2016) is that title. Flip in robustness"
+ubisoft,For Honor,304390,yes,AMF filing 2016-02-11 (Q3 FY2015-16 release): FY2016-17 line-up named,
+ubisoft,Tom Clancy's Ghost Recon Wildlands,460930,yes,AMF filing 2016-02-11 (Q3 FY2015-16 release): FY2016-17 line-up named,
+ubisoft,South Park: The Fractured But Whole,488790,yes,GlobeNewswire 2017-05-16 (FY2016-17 results): 4 AAA franchises for FY2017-18,
+ubisoft,Assassin's Creed Origins,582160,yes,GlobeNewswire 2017-05-16 (FY2016-17 results): 4 AAA franchises for FY2017-18,
+ubisoft,Far Cry 5,552520,yes,GlobeNewswire 2017-05-16 (FY2016-17 results): 4 AAA franchises for FY2017-18,
+ubisoft,The Crew 2,646910,yes,GlobeNewswire/MarketScreener 2018-05-17 (FY2017-18 results): three AAA games for FY2018-19,Also in FY2017-18 AAA list before delay
+ubisoft,Assassin's Creed Odyssey,812140,yes,GlobeNewswire/MarketScreener 2018-05-17 (FY2017-18 results): three AAA games for FY2018-19,"Listed as 'an unannounced franchise title' (AAA) in May 2018; revealed June 2018, before launch"
+ubisoft,Far Cry New Dawn,939960,no,AMF filing 2019-02-14,"Named as an upcoming release, not among the FY2018-19 AAA games"
+ubisoft,Tom Clancy's The Division 2,2221490,yes,GlobeNewswire/MarketScreener 2018-05-17 (FY2017-18 results): three AAA games for FY2018-19,
+ubisoft,Anno 1800,916440,no,Yahoo Finance/GlobeNewswire 2019-05-15; AMF filing 2019-02-14,Not among the FY2019-20 AAA titles; PC-only title in a smaller genre
+ubisoft,Tom Clancy's Ghost Recon Breakpoint,2231380,yes,Yahoo Finance/GlobeNewswire 2019-05-15 (FY2018-19 results),"FY2019-20: 'four AAA titles, including Ghost Recon Breakpoint' (pre-launch)"
+ubisoft,Watch Dogs: Legion,2239550,yes,AMF filing 2019-10-24 / May 2020 FY2019-20 results: five AAA games for FY2020-21,
+ubisoft,Assassin's Creed Valhalla,2208920,yes,AMF filing 2019-10-24 / May 2020 FY2019-20 results: five AAA games for FY2020-21,
+ubisoft,Immortals Fenyx Rising,2221920,yes,AMF filing 2019-10-24 / May 2020 FY2019-20 results: five AAA games for FY2020-21,Listed as Gods & Monsters
+ubisoft,Far Cry 6,2369390,yes,AMF filing 2019-10-24 / May 2020 FY2019-20 results: five AAA games for FY2020-21; AMF filing 2021-05-11 (FY2020-21 results): FY2021-22 line-up,Unannounced AAA from 'biggest franchises' in FY2020-21; named in FY2021-22 line-up
+ubisoft,Riders Republic,2290180,no,AMF filing 2021-05-11 (FY2020-21 results),"Named in an untiered FY2021-22 list of 'premium and F2P titles', never labelled AAA. Flip in robustness"
+ubisoft,Tom Clancy's Rainbow Six Extraction,2379390,yes,AMF filing 2019-10-24 / May 2020 FY2019-20 results: five AAA games for FY2020-21,Listed as Rainbow Six Quarantine
+ubisoft,The Crew Motorfest,2698940,no,AMF filing 2023-02-16 / 2023-05-16: FY2023-24 line-up,"Named in the 'long-lasting Live games' group, not the big-brand group"
+ubisoft,Assassin's Creed Mirage,3035570,yes,AMF filing 2023-02-16 / 2023-05-16: FY2023-24 line-up,Big-brand group
+ubisoft,Avatar: Frontiers of Pandora,2840770,yes,AMF filing 2023-02-16 / 2023-05-16: FY2023-24 line-up,Big-brand group
+ubisoft,Prince of Persia: The Lost Crown,2751000,no,AMF filing 2023-07-20,Added to the FY24 list after the big-brand titles; not in the big-brand group
+ubisoft,Skull and Bones,2853730,no,AMF filing 2023-02-16 / 2023-05-16,"Listed in the 'long-lasting Live games' tier, not the big-brand tier. Flip in robustness: highlighted as a major release"
+ubisoft,Star Wars Outlaws,2842040,yes,AMF filing 2024-02-08 (Q3 FY2023-24): FY25 slate,
+ubisoft,Assassin's Creed Shadows,3159330,yes,AMF filing 2024-02-08 (Q3 FY2023-24): FY25 slate,Listed as Assassin's Creed Codename Red
+ubisoft,Anno 117: Pax Romana,3274580,,,Holdout game; not yet researched
+square_enix,Stranger of Paradise Final Fantasy Origin,1358700,,,to research
