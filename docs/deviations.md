@@ -14,3 +14,10 @@
 - Original: games not on Steam at launch use the publisher's primary PC store as recorded by ITAD.
 - New: if that store's ITAD history starts more than 7 days after PC launch, use the Epic Game Store history instead, provided it starts within 7 days of launch. If neither does, the game is excluded for missing launch-period data.
 - Reason: The Crew Motorfest's Ubisoft Store history starts 51 days after launch, missing most of the day 15-90 window; its Epic history starts on launch day. Ubisoft priced its games the same on both stores. Applied to: The Crew Motorfest.
+
+## 2026-11-27: Robustness checks added after building the event table, before any abnormal returns were computed
+Primary specifications unchanged. Added:
+- early_cut_strict: first_cut_depth exceeds norm_at_first_cut by at least 0.10. Reason: early_cut_rt (D15) flags 17 of 25 Square Enix and 21 of 28 Ubisoft main-sample games, because early cuts are compared with norms at early days, when few earlier games had discounted.
+- Event-level aggregation: games sharing the same earnings announcement are averaged into one observation (abn_90 averaged; one CAR_E per announcement).
+- Norm-depth filter: drop games with n_norm_90 < 5.
+- Pilot note: with 3 publishers, publisher-clustered inference (D10) is not reliable; pilot results are reported as descriptive.
