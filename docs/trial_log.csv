@@ -1,1 +1,12 @@
 date,phase,variant,description,result
+2026-11-27,Q1,primary_HC1,"Primary: abn_90 + controls + publisher FE, HC1 SEs",coef=0.0819; se=0.0587; p=0.163; n=65
+2026-11-27,Q1,primary_cluster_event,"Primary, SEs clustered by earnings announcement",coef=0.0819; se=0.0577; p=0.156; n=65
+2026-11-27,Q1,no_controls,abn_90 + publisher FE only,coef=0.0787; se=0.0535; p=0.141; n=65
+2026-11-27,Q1,single_day_depth,abn_single_90 (original D5) instead of abn_90,coef=0.0968; se=0.0513; p=0.059; n=65
+2026-11-27,Q1,norm_depth_filter,Drop games with n_norm_90 < 5,coef=0.0942; se=0.0613; p=0.124; n=61
+2026-11-27,Q1,drop_late_to_steam,Drop games not on Steam at launch,coef=0.0837; se=0.0612; p=0.172; n=50
+2026-11-27,Q1,event_level,One observation per earnings announcement (averaged),coef=0.0736; se=0.0729; p=0.312; n=45
+2026-11-27,Q1,leave_out_capcom,Drop capcom,coef=0.0394; se=0.0657; p=0.549; n=53
+2026-11-27,Q1,leave_out_square_enix,Drop square_enix,coef=0.1788; se=0.0895; p=0.046; n=40
+2026-11-27,Q1,leave_out_ubisoft,Drop ubisoft,coef=0.1061; se=0.0767; p=0.167; n=37
+2026-11-27,Q1,publisher_block_bootstrap,"Exact, 27 draws",coef=nan; se=nan; p=nan; n=65

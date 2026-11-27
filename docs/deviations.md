@@ -34,3 +34,12 @@ Primary specifications unchanged. Added:
 - D4(b) applied to all games, as D4 is written ("either" criterion), not only to late-to-Steam games.
 - Rule: a game is a key title if a results release published before its PC launch labels it AAA, or lists it in the top tier ("big brands", "major releases", "large game") of the fiscal year's line-up. A mention in a full release schedule or a lower tier (e.g. "long-lasting Live games") does not count. Renamed projects count (e.g. Gods & Monsters = Immortals Fenyx Rising).
 - Ubisoft result: 19 of 28 games qualify, so tentpole (a or b) covers about two-thirds of Ubisoft games. Robustness check added: tentpole by D4(a) only.
+
+## 2026-11-27: D4(b) by publisher, set before any abnormal returns were computed
+- Square Enix: D4(b) not applied. Its results materials label nearly every new HD release a "major" title (slide headings "HD Games: Major New titles in FY..."; the FY2017/3 "major titles" list includes small releases), so the criterion does not discriminate. Square Enix tentpoles use D4(a) only. Known consequence: Shadow of the Tomb Raider, singled out as a major title in May 2018, is not a tentpole under D4(a). Stranger of Paradise (late to Steam) has no tentpole status and is excluded from tentpole splits.
+- Capcom: D4(b) source is the annual "Sales Plan for Major Consumer Titles" (2-3 titles per year with unit targets). Applied to Street Fighter V (first game in the sample, no earlier games for D4(a)): yes. Other Capcom games use D4(a); D4(b) to be completed as a confirmation.
+
+## 2026-11-27: Q1 script fixes after the first run (no change to the primary specification)
+- event_level robustness row now uses the same sample as the primary model (Street Fighter V, which has no norm, was included before averaging: 46 vs 45 announcements). Bug fix.
+- Controls that are constant within a subsample (size_missing in drop_late_to_steam) are dropped automatically, removing a rank-deficiency warning. Does not affect the abn_90 coefficient.
+- First-run primary result (unchanged by these fixes): abn_90 coefficient +0.082 (HC1 SE 0.059, p = 0.16, n = 65), opposite in sign to the prediction.
