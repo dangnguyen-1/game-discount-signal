@@ -119,6 +119,7 @@ A second placebo restricted to the same calendar month was added after Q2 and tu
 - **Market model:** a broad national index does not remove sector or seasonal effects specific to games companies.
 - **Contamination:** unscheduled company announcements (profit warnings, restructurings) can fall inside event windows; only scheduled earnings were flagged.
 - **Trading rule:** borrow costs and short availability are not modeled.
+- **Secondary outcome not analyzed:** the guidance-cut indicator (D7, D11) was not tested, because guidance changes were only recorded for some announcements. With two confirmed cuts in the sample, it could not have been tested meaningfully in the pilot.
 
 ## 7. Next steps for a full-sample version
 
