@@ -13,6 +13,8 @@ Groups (D15, D4):  A = early_cut_rt and tentpole   B = early_cut_rt, not tentpol
 Underreaction (H2): little reaction at the discount (CAR_D near 0) but a negative reaction at earnings (CAR_E < 0)
 for group A. The alternative, that the market reacts at once, predicts CAR_D < 0 and CAR_E near 0.
 Tests are cross-sectional t-tests across games; with 3 publishers they are descriptive.
+date_clustered (added after the first run, logged): events sharing a publisher and discount day 0 are
+averaged, because Steam seasonal sales put many first discounts on the same days.
 """
 
 from datetime import date
@@ -74,6 +76,35 @@ def group_table(d, flag, label):
     return rows
 
 
+def group_table_clustered(d, flag, label):
+    """Events sharing a publisher and discount day 0 averaged into one observation per group."""
+    d = d.assign(group=assign_group(d, flag)).dropna(subset=["day0_discount"])
+    c = d.groupby(["group", "publisher", "day0_discount"], as_index=False)[CARS].mean()
+    rows = []
+    for grp, g in c.groupby("group"):
+        if grp == "unknown":
+            continue
+        row = {"variant": label, "group": grp, "n": len(g)}
+        for col in CARS:
+            t, p = t_stat(g[col])
+            row.update({f"mean_{col}": g[col].mean(), f"t_{col}": t, f"p_{col}": p})
+        row["share_CAR_D_0_10_negative"] = (g["CAR_D_0_10"] < 0).mean()
+        rows.append(row)
+    return rows
+
+
+def clustering_summary(d):
+    """How concentrated the discount events are in calendar time."""
+    d = d.assign(group=assign_group(d, "early_cut_rt")).dropna(subset=["day0_discount"])
+    d["month"] = pd.to_datetime(d["day0_discount"]).dt.month
+    out = d.groupby("group").agg(
+        events=("steam_appid", "size"),
+        distinct_publisher_dates=("day0_discount", lambda s: d.loc[s.index, ["publisher", "day0_discount"]]
+                                  .drop_duplicates().shape[0]),
+        share_in_jun_nov_dec=("month", lambda m: m.isin([6, 11, 12]).mean()))
+    return out
+
+
 def cut_regression(d):
     e = d[d["early_cut_rt"]].dropna(subset=["CAR_D_0_10", "cut_vs_norm"])
     m = smf.ols("CAR_D_0_10 ~ cut_vs_norm + C(publisher)", e).fit(cov_type="HC1")
@@ -126,7 +157,8 @@ def main():
     d = load()
     rows = (group_table(d, "early_cut_rt", "primary")
             + group_table(d, "early_cut_strict", "strict_flag")
-            + group_table(d[~d["near_earnings"]], "early_cut_rt", "excl_near_earnings"))
+            + group_table(d[~d["near_earnings"]], "early_cut_rt", "excl_near_earnings")
+            + group_table_clustered(d, "early_cut_rt", "date_clustered"))
     groups = pd.DataFrame(rows)
     reg = cut_regression(d)
     config.TABLES.mkdir(parents=True, exist_ok=True)
@@ -140,6 +172,9 @@ def main():
     print(f"Q2 sample: {len(d)} games\n")
     print("Mean abnormal returns at the first discount (CAR_D) and at earnings (CAR_E), by group:")
     print(show.round(4).to_string(index=False))
+    print("\nCalendar clustering of discount events (date_clustered rows average events sharing a "
+          "publisher and day 0):")
+    print(clustering_summary(d).round(2).to_string())
     print(f"\nRegression, early cuts only: CAR_D_0_10 on (first-cut depth - norm at that day): "
           f"coef {reg['coef']:.4f}, se {reg['se']:.4f}, p {reg['p']:.3f}, n {reg['n']}")
     print("Cross-sectional t-tests; with 3 publishers these are descriptive.")

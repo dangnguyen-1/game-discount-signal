@@ -19,4 +19,7 @@ date,phase,variant,description,result
 2026-11-27,Q2,excl_near_earnings | A: early-cut tentpole,Mean CARs by group,n=22; CAR_D_0_10=-0.0310 (p=0.045); CAR_E=0.0326 (p=0.091)
 2026-11-27,Q2,"excl_near_earnings | B: early cut, not tentpole",Mean CARs by group,n=20; CAR_D_0_10=-0.0095 (p=0.426); CAR_E=0.0164 (p=0.329)
 2026-11-27,Q2,excl_near_earnings | C: no early cut,Mean CARs by group,n=18; CAR_D_0_10=-0.0175 (p=0.213); CAR_E=-0.0041 (p=0.822)
+2026-11-27,Q2,date_clustered | A: early-cut tentpole,Mean CARs by group,n=21; CAR_D_0_10=-0.0281 (p=0.079); CAR_E=0.0364 (p=0.067)
+2026-11-27,Q2,"date_clustered | B: early cut, not tentpole",Mean CARs by group,n=21; CAR_D_0_10=-0.0051 (p=0.675); CAR_E=0.0187 (p=0.248)
+2026-11-27,Q2,date_clustered | C: no early cut,Mean CARs by group,n=22; CAR_D_0_10=-0.0293 (p=0.020); CAR_E=-0.0201 (p=0.225)
 2026-11-27,Q2,CAR_D_0_10 ~ cut_vs_norm (early cuts),"Early cuts, publisher FE, HC1",coef=-0.0196; se=0.1096; p=0.858; n=43

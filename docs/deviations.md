@@ -44,3 +44,8 @@ Primary specifications unchanged. Added:
 - Controls that are constant within a subsample (size_missing in drop_late_to_steam) are dropped automatically, removing a rank-deficiency warning. Does not affect the abn_90 coefficient.
 - First-run primary result (unchanged by these fixes): abn_90 coefficient +0.082 (HC1 SE 0.059, p = 0.16, n = 65), opposite in sign to the prediction.
 - Clarification: the event_level estimate was unchanged by the fix (0.0736); statsmodels had already dropped the game with missing abn_90, so only the reported n_events count was wrong (46 -> 45).
+
+## 2026-11-27: Q2 robustness check added after the first Q2 run
+- date_clustered: events sharing a publisher and discount day 0 are averaged into one observation per group, and the number of distinct publisher-dates and the share of first discounts in June, November and December are reported.
+- Reason: the first Q2 run showed similar post-discount declines in groups A and C, with a slow drift over days 5-12, consistent with many first discounts falling on the same Steam seasonal-sale days. Cross-sectional t-tests treat those events as independent. Added after seeing results, so reported as a robustness check, not a primary test.
+- Result of the date_clustered check: little same-publisher same-day overlap (group A: 22 events on 21 publisher-dates; C: 23 on 22); estimates barely change (A: CAR_D_0_10 -2.8%, p = 0.079; C: -2.9%, p = 0.020). First discounts concentrate in June, November and December (48-68% vs 25% if uniform). Remaining explanation to test: a seasonal effect common to gaming stocks after Steam sales, addressed by the Q3 placebo test (D12).
