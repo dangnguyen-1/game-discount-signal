@@ -43,3 +43,4 @@ Primary specifications unchanged. Added:
 - event_level robustness row now uses the same sample as the primary model (Street Fighter V, which has no norm, was included before averaging: 46 vs 45 announcements). Bug fix.
 - Controls that are constant within a subsample (size_missing in drop_late_to_steam) are dropped automatically, removing a rank-deficiency warning. Does not affect the abn_90 coefficient.
 - First-run primary result (unchanged by these fixes): abn_90 coefficient +0.082 (HC1 SE 0.059, p = 0.16, n = 65), opposite in sign to the prediction.
+- Clarification: the event_level estimate was unchanged by the fix (0.0736); statsmodels had already dropped the game with missing abn_90, so only the reported n_events count was wrong (46 -> 45).
