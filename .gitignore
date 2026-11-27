@@ -228,3 +228,4 @@ __marimo__/
 data/raw/
 data/interim/
 data/processed/daily_prices.csv
+data/processed/abnormal_returns_daily.csv
