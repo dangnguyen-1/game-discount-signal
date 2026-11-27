@@ -1,8 +1,8 @@
 publisher,ticker,fiscal_year,period,announcement_date,event_type,timing,guidance_change,source_url,notes
-ubisoft,UBI.PA,2015,Q3,2016-02-11,scheduled,check,cut,echanges.dila.gouv.fr (AMF filing),Full-year targets revised down
-ubisoft,UBI.PA,2015,FY,2016-05-12,scheduled,check,,echanges.dila.gouv.fr (AMF filing),
-ubisoft,UBI.PA,2016,Q1,2016-07-19,scheduled,check,maintain,echanges.dila.gouv.fr (AMF filing),Full-year targets confirmed
-ubisoft,UBI.PA,2016,H1,2016-11-03,scheduled,check,,globenewswire.com,
+ubisoft,UBI.PA,2015,Q3,2016-02-11,scheduled,after_close,cut,echanges.dila.gouv.fr (AMF filing),Full-year targets revised down
+ubisoft,UBI.PA,2015,FY,2016-05-12,scheduled,after_close,,echanges.dila.gouv.fr (AMF filing),
+ubisoft,UBI.PA,2016,Q1,2016-07-19,scheduled,after_close,maintain,echanges.dila.gouv.fr (AMF filing),Full-year targets confirmed
+ubisoft,UBI.PA,2016,H1,2016-11-03,scheduled,after_close,,globenewswire.com,
 ubisoft,UBI.PA,2016,Q3,2017-02-09,scheduled,after_close,revised,echanges.dila.gouv.fr (AMF filing),Targets revised for Q3 shortfall and South Park delay; check direction
 ubisoft,UBI.PA,2016,FY,2017-05-16,scheduled,after_close,,globenewswire.com,Released 11:40 ET (17:40 Paris)
 ubisoft,UBI.PA,2017,Q1,2017-07-18,scheduled,after_close,maintain,globenewswire.com,
@@ -41,7 +41,7 @@ ubisoft,UBI.PA,2024,H1,2024-10-30,scheduled,after_close,maintain,live.euronext.c
 ubisoft,UBI.PA,2024,Q3,2025-02-13,scheduled,after_close,,live.euronext.com,
 ubisoft,UBI.PA,2024,FY,2025-05-14,scheduled,after_close,,live.euronext.com,17:40 CEST
 ubisoft,UBI.PA,2025,Q1,2025-07-22,scheduled,after_close,,live.euronext.com,
-ubisoft,UBI.PA,2025,H1,2025-11-21,scheduled,check,,ubisoft.com investor calendar,Postponed from 2025-11-13; shares suspended 2025-11-14 to 11-20; check release time vs reopening
+ubisoft,UBI.PA,2025,H1,2025-11-21,scheduled,after_close,,ubisoft.com investor calendar,Postponed from 2025-11-13; shares suspended 2025-11-14 to 11-20; check release time vs reopening
 ubisoft,UBI.PA,2025,RU,2026-01-21,unscheduled,after_close,cut,Reuters via news reports,"Restructuring, six cancellations; FY2025-26 net bookings cut, FY2026-27 guidance withdrawn"
 ubisoft,UBI.PA,2025,Q3,2026-02-12,scheduled,after_close,,ubisoft.com investor calendar,
 ubisoft,UBI.PA,2025,FY,2026-05-20,scheduled,after_close,,live.euronext.com,17:40 CEST
