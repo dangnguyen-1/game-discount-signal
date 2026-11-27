@@ -1,70 +1,74 @@
-# README: Mikhail feedback
+# Does the Price Tag Tell?
 
-Owner: Mikhail Oet. Last updated: July 22, 2026.
+**Video game discount speed as an early signal for publisher stocks: a pre-registered event study**
 
-This folder holds the current corrective deliverables for Dang's Paper 2
-wavelet-coherence pipeline. Superseded versions live in `Archive\`.
+When a big game sells badly, its publisher often cuts the price early. Those cuts are public the day they happen, while sales figures only reach investors weeks later in earnings reports. This project tests whether unusually early discounting predicts the stock reaction at the next earnings announcement, and whether a trading rule built on it makes money.
 
-## Current files (use these)
+Pilot: **Capcom, Square Enix and Ubisoft**, 66 PC games launched 2016–2024, plus 8 games from 2025–2026 held out and analyzed once.
 
-| File | What it is |
-|---|---|
-| `Technical_Note_Wavelet_Pipeline_Audit_for_Dang_v5.pdf` (and `.docx`) | The technical audit note, version 5: fourteen registered defects (D1 to D14), the quantitative reconciliation against the Paper 1 headline (Section 4.1), the three-family aggregation design (Section 5), and the measurement validation protocol (Appendix A). Read this first. |
-| `wavelet_pipeline_corrected_v3.py` | The corrected analysis pipeline. Computes COI-valid AWC, PASC, and CP on a 2 to 256 trading-day grid, builds the three construct families (liquidity, risk, volume), runs the channel, horizon, and firm-type tests with FDR correction, and writes the hypothesis verdict table. Replaces the metric and verdict layers of `aggregated_wavelet_coherence.ipynb`. |
-| `family_measurement_diagnostics_v2.py` | The Appendix A validation tests: Cronbach's alpha per family, Horn's parallel analysis, varimax-rotated factor loadings, and HTMT discriminant validity. Run this on the pipeline's output before quoting any family-level verdict. |
+## Headline results
 
-## How to run
+| Question | Prediction | Result |
+|---|---|---|
+| Does abnormal discount depth by day 90 predict the earnings reaction? | Negative | Positive and not significant (+0.08, p = 0.16), positive in every robustness variant |
+| Does the market react at the discount or only at earnings? | Underreaction | A ~3% decline after first discounts for early-cut major games, but a similar one for games with no early cut; partly seasonal |
+| Is shorting after an early cut on a major game profitable? | Yes | -5.5% per trade after costs, worse than 99.7% of random-date placebo runs |
 
-Dependencies (one-time):
+The hypothesis is not supported. The results hint, as an exploratory idea for future testing, that markets may briefly overreact to early discounts on major games, which then recover by the earnings report.
 
-```
-pip install numpy pandas scipy statsmodels PyWavelets openpyxl
-```
+Full write-up: **[docs/report.md](docs/report.md)**
 
-Step 1. Run the pipeline from the folder that contains `final_daily_data.csv`
-and `firm_classification.csv` (currently `..\Upload 07 15 2026\`), or edit the
-paths at the bottom of the script:
+## How it was done
 
-```
-python wavelet_pipeline_corrected_v3.py
-```
+- **Pre-registered.** All tests were fixed in [docs/preregistration.md](docs/preregistration.md) before any data was collected. Every later change, with its date and reason, is in [docs/deviations.md](docs/deviations.md), and every specification run is in [docs/trial_log.csv](docs/trial_log.csv).
+- **Discount data:** full price histories from the IsThereAnyDeal API (Steam, Ubisoft Store and Epic), cleaned for tracking errors, measured against each publisher's own discounting norm.
+- **Event study:** market-model abnormal returns around earnings announcements and first discounts, with placebo tests on random dates.
+- **Data checks:** problems found and fixed are documented in [docs/data_log.md](docs/data_log.md), including a wrong-edition price history, a stock trading suspension padded with fake prices, and a retired Steam API.
 
-This writes `statistics_tables_corrected_v3\` with per-segment firm metrics
-(including the family-average rows), the descriptive Paper 1 continuity table,
-and `hypothesis_evidence_summary_corrected.csv`. For a fast first pass, open
-the script and set `compute_pasc_cp=False` in the `__main__` block; the AR(1)
-surrogates for PASC and CP are the slow part.
-
-Step 2. Run the measurement diagnostics on the full-sample firm metrics:
+## Repository layout
 
 ```
-python family_measurement_diagnostics_v2.py statistics_tables_corrected_v3\firm_metrics_full.csv
+src/            data collection, cleaning, event study and analysis scripts
+data/manual/    hand-built inputs: game lists, exclusions, earnings dates, key titles, price overrides
+data/processed/ derived per-game measures (raw downloads are not committed)
+output/         result tables and figures
+docs/           pre-registration, deviations, data log, trial log, report
+config.py       all parameters, matching the pre-registration
+run_all.py      reruns the analysis in order
 ```
 
-Read the output against the decision rules in Appendix A.6 of the note.
+## Reproducing
 
-## About `__pycache__` (now deleted)
+Requires Python 3.11+ and an IsThereAnyDeal API key in `.env` (`ITAD_API_KEY=...`).
 
-A `__pycache__` folder briefly appeared here and caused confusion. It was NOT
-source code: Python automatically creates a folder with that name, containing
-compiled bytecode copies (`.pyc` files), whenever a `.py` file is imported or
-run. It is machine-generated, safe to delete at any time, and Python will
-recreate it next to the scripts on the next run. If one reappears after
-running the code above, ignore it or delete it; the deliverables are only the
-plainly named `.py`, `.docx`, and `.pdf` files listed in this README.
+Data collection, per publisher (`capcom`, `square_enix`, `ubisoft`), then once for all:
 
-## Archive contents
+```
+pip install -r requirements.txt
+python -m src.fetch_steam search <publisher>    # suggests app IDs; verified IDs go in data/manual/candidates_<publisher>.csv
+python -m src.fetch_steam details <publisher>
+python -m src.fetch_itad <publisher>
+python -m src.build_prices
+python -m src.fetch_stocks
+python -m src.fetch_reviews
+```
 
-`Archive\` holds superseded material, kept for the record: technical note
-versions 1 through 4, pipeline versions 1 and 2, diagnostics version 1, and
-the independent parallel review's H1 handoff
-(`H1_Code_Logic_Technical_Handoff_2026-07-22.md` / `.docx`), whose findings
-are incorporated into note v5 as register items D11 to D14 and Section 4.1.
+Earnings dates (`data/manual/earnings_<publisher>.csv`) and tentpole key titles were compiled by hand from investor relations materials; sources are in the files and in `docs/data_log.md`.
 
-## Version history (one line each)
+Analysis, from the collected data:
 
-1. v1 (July 21): defects D1 to D10; corrected COI-valid metric layer.
-2. v2 (July 22): H1 estimand items D11 to D13; family aggregation; Paper 1 continuity table.
-3. v3 (July 22): reflective measurement-model framing; Appendix A protocol; diagnostics module.
-4. v4 (July 22): three-family map (volume family with three log-transformed indicators).
-5. v5 (July 22): quantitative reconciliation (sub-4 percent reconstructions versus the 24.5 percent headline); D14 parallel-pipeline finding; full incorporation of the independent review's handoff.
+```
+python run_all.py
+```
+
+This runs `build_prices`, `fetch_stocks` (from the cached prices), `build_events`, `event_study`, `q1_regression`, `q2_discount_reaction` and `q3_trading_rule` in order. The holdout analysis (`src.holdout`) is not included: it was run once, as the pre-registration requires (`docs/holdout_run.txt`).
+
+Raw data from IsThereAnyDeal, Steam and Yahoo Finance is downloaded locally and not redistributed.
+
+## Limitations
+
+Three publishers cannot support reliable clustered inference, so the pilot's p-values are descriptive, and the holdout contains no trades. See the report for the full list and the next steps for a full-sample version.
+
+## License
+
+The code is released under the MIT License (see `LICENSE`). Data obtained from IsThereAnyDeal, Steam and Yahoo Finance remains subject to those services' terms.
