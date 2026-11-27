@@ -1,0 +1,41 @@
+game_title,approx_year,status,reason,steam_appid
+Rise of the Tomb Raider,2016,likely_exclude,PC port months after Xbox launch (D2d),391220
+HITMAN,2016,check,Episodic launch; check launch price and structure,
+I Am Setsuna,2016,candidate,Check launch price,441830
+Deus Ex: Mankind Divided,2016,candidate,,337000
+NieR:Automata,2017,check,PC about 3 weeks after Japan PS4 launch; check D2d 30-day window,524220
+Lost Sphear,2018,candidate,Check launch price,525240
+Shadow of the Tomb Raider,2018,candidate,,750920
+Just Cause 4,2018,candidate,,517630
+Octopath Traveler,2019,likely_exclude,PC port months after Switch launch (D2d),921570
+Left Alive,2019,candidate,,714370
+Oninaki,2019,candidate,Check launch price,987720
+Trials of Mana,2020,candidate,Remake,924980
+Marvel's Avengers,2020,candidate,Delisted from Steam in 2023; history should still exist,997070
+Balan Wonderworld,2021,candidate,,1341050
+Outriders,2021,candidate,,680420
+Life is Strange: True Colors,2021,candidate,,936790
+Marvel's Guardians of the Galaxy,2021,candidate,,1088850
+Final Fantasy VII Remake Intergrade,2021,likely_exclude,PC port long after PS4 launch (D2d),1462040
+Stranger of Paradise Final Fantasy Origin,2022,check,PC launched on Epic first; check D2e and D3,1358700
+Babylon's Fall,2022,candidate,,889750
+The DioField Chronicle,2022,candidate,,1399080
+Star Ocean The Divine Force,2022,candidate,,1776380
+Harvestella,2022,candidate,,1816300
+Tactics Ogre: Reborn,2022,likely_exclude,Remaster,1451090
+Crisis Core Final Fantasy VII Reunion,2022,likely_exclude,Remaster,1608070
+Forspoken,2023,candidate,,1680880
+Octopath Traveler II,2023,candidate,,1971650
+Star Ocean The Second Story R,2023,candidate,Remake,2238900
+SaGa Emerald Beyond,2024,candidate,Check launch price,2085000
+Visions of Mana,2024,candidate,,2490990
+Romancing SaGa 2: Revenge of the Seven,2024,candidate,Remake,2455640
+Life is Strange: Double Exposure,2024,candidate,,1874000
+Dragon Quest III HD-2D Remake,2024,candidate,Remake,2701660
+Fantasian Neo Dimension,2024,likely_exclude,Port of 2021 Apple Arcade game,2844850
+Final Fantasy XVI,2024,likely_exclude,PC port long after PS5 launch (D2d),2515020
+Final Fantasy VII Rebirth,2025,likely_exclude,PC port long after PS5 launch (D2d),2909400
+Final Fantasy Tactics: The Ivalice Chronicles,2025,likely_exclude,Remaster,1004640
+Dragon Quest I & II HD-2D Remake,2025,candidate,Remake; holdout,2893570
+Octopath Traveler 0,2025,check,Holdout; check launch date and platforms,3014320
+Dragon Quest VII Reimagined,2026,check,Remake; holdout; check launch date vs sample end,2499860

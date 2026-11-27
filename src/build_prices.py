@@ -38,7 +38,12 @@ def load_log(itad_id):
         "price": [e["deal"]["price"]["amount"] for e in entries],
         "regular": [e["deal"]["regular"]["amount"] for e in entries],
     })
-    log = log[log["regular"] > 0].sort_values("ts", kind="stable").reset_index(drop=True)
+    log = log.sort_values("ts", kind="stable").reset_index(drop=True)
+    zero = log["regular"] <= 0
+    # zero entries sharing a timestamp with a real entry are artifacts: drop them
+    log = log[~(zero & log["ts"].isin(log.loc[~zero, "ts"]))].reset_index(drop=True)
+    # remaining zero entries mean the price is unknown from then on, until the next real entry
+    log.loc[log["regular"] <= 0, "price"] = float("nan")
     log["date"] = log["ts"].dt.tz_convert(STORE_TZ).dt.date
     return log
 
@@ -46,16 +51,18 @@ def load_log(itad_id):
 def daily_lowest(log, start, end):
     """Lowest price available on each calendar day from start to end (inclusive)."""
     day_min = log.groupby("date")["price"].min()
-    day_last = log.groupby("date")["price"].last()
+    day_last = log.groupby("date")["price"].agg(lambda s: s.iloc[-1])
     before = log[log["date"] < start]
     carry = before["price"].iloc[-1] if len(before) else None
+    if carry is not None and pd.isna(carry):
+        carry = None
 
     rows, d = [], start
     while d <= end:
-        candidates = [p for p in (carry, day_min.get(d)) if p is not None]
+        candidates = [p for p in (carry, day_min.get(d)) if p is not None and not pd.isna(p)]
         rows.append({"date": d, "price": min(candidates) if candidates else None})
         if d in day_last.index:
-            carry = day_last[d]
+            carry = None if pd.isna(day_last[d]) else day_last[d]
         d += timedelta(days=1)
     return pd.DataFrame(rows)
 
