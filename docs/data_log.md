@@ -20,3 +20,9 @@
 - The Division 2 (Ubisoft Store): history starts 4 days after launch (within the 7-day tolerance); days 0-3 have no price.
 - Bug fixed in fetch_itad.py summarize(): launch price fell back to the last history entry instead of the first when no pre-launch entry existed (Steep, The Division 2 showed $29.99). Coverage summary only; build_prices.py was not affected.
 - Price above P0 (likely edition mix-up, as with Resident Evil Village): Far Cry 5 days 305-306 ($69.99), outside all measurement windows, no effect. Assassin's Creed Odyssey days 32-37 (2018-11-06 to 11-11, $79.99), inside the window: a sale on those days would be missed, which could affect max_depth_45 and first_cut_day (47); max_depth_90 (0.50) cannot be affected. Kept as is; added to spot-check list.
+
+## Stock prices (Yahoo Finance via yfinance)
+- Downloaded 2026-11-27: 9697.T, 9684.T, UBI.PA, ^N225, ^FCHI, adjusted closes, 2015-01-01 to DATA_COLLECTION_DATE. Raw files not committed.
+- Zero-volume rows dropped: Yahoo pads exchange holidays (Tokyo: 24 rows, mostly 2017-2018 Japanese holidays; Paris: 2019-12-25) and the Ubisoft trading suspension (2025-11-14 to 11-20) with a repeated price at zero volume. The return across a closure is recorded on the day trading resumes (Ubisoft: 2025-11-21).
+- Index returns are computed over the stock's own trading days, so both returns always cover the same interval.
+- Largest moves checked against news: Ubisoft 2026-01-22 (-40%, restructuring and six cancellations), 2024-10-04 (+34%, buyout reports); Capcom 2024-08-05/06 (global market crash and rebound, Nikkei -12%/+10%).
