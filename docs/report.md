@@ -11,7 +11,7 @@ Every test was pre-registered (`docs/preregistration.md`, committed before any d
 The pilot finds **no support for the hypothesis**:
 
 - **Q1:** abnormal discount depth by day 90 does not predict a worse stock reaction at the next earnings announcement. The estimated relation is positive (+0.082, p = 0.16) and positive in every robustness variant.
-- **Q2:** stocks drift down by about 3% in the two weeks after a game's first discount, but the decline is similar for games with and without an unusually early cut, and partly coincides with Steam's seasonal sales. It is not specific to the signal.
+- **Q2:** stocks drift down by about 3% in the two weeks after a game's first discount, but games with no early cut fall almost as much (-2.7% vs -3.1% for early-cut tentpoles; other early cuts fall only -0.5%), and partly coincides with Steam's seasonal sales. It is not specific to the signal.
 - **Q3:** the pre-registered trading rule (short early-cut tentpoles from the discount until after earnings) loses 5.5% per trade after costs, worse than 99.7% of random-date placebo runs.
 
 The results suggest, as an **exploratory hypothesis only**, that markets may briefly overreact to early discounts on major games, which then recover by the earnings report. It was found by looking at these data and needs to be tested on new data.
@@ -101,7 +101,7 @@ A second placebo restricted to the same calendar month was added after Q2 and tu
 
 ### Holdout (D13, run once)
 
-8 games launched 2025–2026, analyzed once with the main-sample rules unchanged (`docs/holdout_run.txt`). There are **no early-cut tentpoles**, so Q3 cannot be tested out of sample. The simple Q1 slope is positive (+0.20), the same sign as the main sample, but it is not informative: Capcom's three games all have zero abnormal depth, pairs of games share announcements, and with no room for publisher fixed effects the slope mostly reflects Capcom's +19.8% reaction to its July 2026 results. One holdout game shows the cost of unscheduled news: Anno 117's 10-day discount window contains Ubisoft's -40% restructuring day (22 January 2026), giving a CAR_D of -31.7% unrelated to the discount.
+8 games launched 2025–2026, analyzed once with the main-sample rules unchanged (`docs/holdout_run.txt`). There are **no early-cut tentpoles**, so Q3 cannot be tested out of sample. The simple Q1 slope is positive (+0.20), the same sign as the main sample, but it is not informative: Capcom's three games all have zero abnormal depth, pairs of games share announcements, and with no room for publisher fixed effects the slope mostly reflects the +18.9% abnormal reaction to Capcom's July 2026 results. One holdout game shows the cost of unscheduled news: Anno 117's 10-day discount window contains Ubisoft's -40% restructuring day (22 January 2026), giving a CAR_D of -31.7% unrelated to the discount.
 
 ## 5. What the pilot shows and does not show
 

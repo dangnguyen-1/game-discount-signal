@@ -1,25 +1,33 @@
+# Data log
 
-## ITAD price histories
-- Downloaded 2026-11-26 21:36 UTC (DATA_COLLECTION_DATE = 2026-11-26).
-- Endpoints: GET /games/lookup/v1 (by Steam appid), GET /games/history/v2 (id, country=US, shops=61, since=2010-01-01).
-- Steam shop ID on ITAD: 61.
-- Capcom pilot: 16 games, all matched, all histories start before PC launch (pre-order tracking).
+Where every input came from, when it was downloaded, and every data problem found and how it was handled.
+Changes to pre-registered decisions are in `deviations.md`; this file covers data only.
 
 ## Sources and choices
 - ITAD API terms read 2026-11-26 (docs.isthereanydeal.com). Raw responses not redistributed; derived measures only.
 - Benchmark indices: Nikkei 225 (^N225) for all Japanese publishers; CAC 40 (^FCHI) for French publishers. TOPIX not used because its free Yahoo Finance data is unreliable.
 - Steam publisher strings for Capcom: "CAPCOM Co., Ltd.", "Capcom", "Capcom U.S.A, Inc." (stored without commas in publishers.csv; matching ignores punctuation).
 
+## ITAD price histories
+- Downloaded 2026-11-26 21:36 UTC (DATA_COLLECTION_DATE = 2026-11-26).
+- Endpoints: GET /games/lookup/v1 (by Steam appid), GET /games/history/v2 (id, country=US, shops=61, since=2010-01-01).
+- Steam shop ID on ITAD: 61.
+- Capcom pilot: 16 games, all matched, all histories start before PC launch (pre-order tracking).
+- Square Enix pilot: downloaded 2026-11-27 02:56 UTC; 27 games, all matched, all histories start before PC launch. DATA_COLLECTION_DATE kept at 2026-11-26 for all publishers so every series ends on the same day.
+- Ubisoft pilot: downloaded 2026-11-27 UTC; 30 games. Reference stores: 15 Steam (ITAD shop 61), 14 Ubisoft Store (shop 62), 1 Epic (shop 16; The Crew Motorfest, D3 fallback). Stranger of Paradise (Square Enix) uses Epic under D2(e), PC launch 2022-03-18. Shop IDs from /service/shops/v1 on 2026-11-27.
+- The Division 2 (Ubisoft Store): history starts 4 days after launch (within the 7-day tolerance); days 0-3 have no price.
+- Babylon's Fall: retired from sale in 2022 after day 180; removal not recorded by ITAD; measures to day 180 unaffected.
+- Bug fixed in fetch_itad.py summarize(): launch price fell back to the last history entry instead of the first when no pre-launch entry existed (Steep, The Division 2 showed $29.99). Coverage summary only; build_prices.py was not affected.
+
 ## Price history cleaning rules (applied in build_prices.py; raw ITAD files are never modified)
 1. Drop entries with a regular price of 0 or less. Found in Exoprimal (2023-11-02): a $0.00 entry with the same timestamp as a real 35% discount. Applied before the same-day lowest-price rule (Section 8.4), which would otherwise record a 100% discount.
 2. Corrections from external sources go in data/manual/price_overrides.csv, with the source and date checked. Found in Resident Evil Village: ITAD shows a $79.99 regular price from 2021-01-22 to 2021-10-20, 43 minutes after a $59.99 listing, and later returns to $59.99 with no recorded change.
-- Square Enix pilot: downloaded 2026-11-27 02:56 UTC; 27 games, all matched, all histories start before PC launch. DATA_COLLECTION_DATE kept at 2026-11-26 for all publishers so every series ends on the same day.
 - Cleaning rule 1 refined (2026-11-27): a zero-regular entry sharing a timestamp with a real entry is dropped (Exoprimal). A standalone zero-regular entry marks the price as unknown until the next real entry, instead of carrying the previous price forward (Marvel's Avengers, 2021-07-31: ITAD appears to stop tracking the base game after ~2021-03; first 180 days unaffected).
-- Babylon's Fall: retired from sale in 2022 after day 180; removal not recorded by ITAD; measures to day 180 unaffected.
-- Ubisoft pilot: downloaded 2026-11-27 UTC; 30 games. Reference stores: 15 Steam (ITAD shop 61), 14 Ubisoft Store (shop 62), 1 Epic (shop 16; The Crew Motorfest, D3 fallback). Stranger of Paradise (Square Enix) uses Epic under D2(e), PC launch 2022-03-18. Shop IDs from /service/shops/v1 on 2026-11-27.
-- The Division 2 (Ubisoft Store): history starts 4 days after launch (within the 7-day tolerance); days 0-3 have no price.
-- Bug fixed in fetch_itad.py summarize(): launch price fell back to the last history entry instead of the first when no pre-launch entry existed (Steep, The Division 2 showed $29.99). Coverage summary only; build_prices.py was not affected.
 - Price above P0 (likely edition mix-up, as with Resident Evil Village): Far Cry 5 days 305-306 ($69.99), outside all measurement windows, no effect. Assassin's Creed Odyssey days 32-37 (2018-11-06 to 11-11, $79.99), inside the window: a sale on those days would be missed, which could affect max_depth_45 and first_cut_day (47); max_depth_90 (0.50) cannot be affected. Kept as is; added to spot-check list.
+
+## Verification of price histories
+- Resident Evil Village checked against independent sources (GameSpot pre-order listing, contemporaneous Steam forum posts): launch price corrected to $59.99 via price_overrides.csv; no discount missed between launch and 2021-10-20. Recorded in spotchecks.csv.
+- The other games were screened with automated consistency checks (regular price at launch vs first post-launch change; gaps over 120 days with no recorded change); flagged cases are listed above. Full SteamDB spot checks (Section 8.6) were not completed: SteamDB shows full price history only to signed-in users. Assassin's Creed Odyssey remains pending in spotchecks.csv.
 
 ## Stock prices (Yahoo Finance via yfinance)
 - Downloaded 2026-11-27: 9697.T, 9684.T, UBI.PA, ^N225, ^FCHI, adjusted closes, 2015-01-01 to DATA_COLLECTION_DATE. Raw files not committed.
@@ -31,9 +39,9 @@
 - Capcom: 44 announcements (2016-01-28 to 2026-10-27), collected from Capcom IR calendar archive pages and press releases (capcom.co.jp blocks scripts, so dates were gathered via web search of those pages). Releases came after the Tokyo close (15:20 JST observed) before 2024-11-05; the 8 later releases need their time checked against the 15:30 close. Consistent with returns: the three largest Capcom up-days (2019-08-02, 2023-07-27, 2026-07-29) each follow a Q1 release by one trading day.
 - Square Enix: 44 announcements (2016-02-04 to 2026-11-11), from the IR calendar page (hd.square-enix.com/eng/ir/calendar.html) plus the 2016-02-04 press release. Fiscal years labeled by start year, as for Capcom. Large next-day moves after releases (2020-08-07, 2020-11-09, 2023-08-07, 2024-05-14) are consistent with after-close timing. Largest move, +16.1% on 2025-04-30, is not an earnings date.
 - Ubisoft: 44 scheduled announcements (2016-02-11 to 2026-11-19) plus 4 unscheduled (2017-12-07, 2023-01-11, 2024-09-25, 2026-01-21), marked in event_type. Sources: GlobeNewswire press releases, AMF filings (echanges.dila.gouv.fr), Euronext company news, MarketScreener calendar. Releases at 17:40 Paris time, after the 17:30 close, from 2017; 2016 release times unconfirmed. 2025-11-21 results followed a trading suspension (2025-11-14 to 11-20): check release time vs reopening.
+- Earnings timing: announcements marked "check" (Capcom and Square Enix after the TSE close moved to 15:30 on 2024-11-05; Ubisoft 2016; Ubisoft 2025-11-21) are treated as after_close. Exact release times could not be confirmed (e.g. Square Enix 2025-02-07). This does not affect CAR_E: with day 0 = the trading day after the release date, the [-1, +1] window includes the release day itself (day -1), so a pre-open, intraday or after-close release is captured in every case. Decided before any abnormal returns were computed.
 
 ## Steam reviews
 - Steam retired store.steampowered.com/appreviews on 2026-10-22 (now redirects to the store homepage). Reviews collected 2026-11-27 from its documented replacement, api.steampowered.com/IUserReviewsService/GetAppReviews/v1/ (no key; date_range_start/end; filter=1 Recent, review_type=0 All, purchase_type=1 All; off-topic reviews excluded by Steam default).
 - Windows start 00:00 US Pacific on the launch date. Validated on Resident Evil 7: lifetime 130,319; first 30 days 9,532; first 90 days 11,092.
 - Counts reflect reviews as they exist on the download date.
-- Earnings timing: announcements marked "check" (Capcom and Square Enix after the TSE close moved to 15:30 on 2024-11-05; Ubisoft 2016; Ubisoft 2025-11-21) are treated as after_close. Exact release times could not be confirmed (e.g. Square Enix 2025-02-07). This does not affect CAR_E: with day 0 = the trading day after the release date, the [-1, +1] window includes the release day itself (day -1), so a pre-open, intraday or after-close release is captured in every case. Decided before any abnormal returns were computed.
