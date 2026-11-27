@@ -23,3 +23,11 @@ date,phase,variant,description,result
 2026-11-27,Q2,"date_clustered | B: early cut, not tentpole",Mean CARs by group,n=21; CAR_D_0_10=-0.0051 (p=0.675); CAR_E=0.0187 (p=0.248)
 2026-11-27,Q2,date_clustered | C: no early cut,Mean CARs by group,n=22; CAR_D_0_10=-0.0293 (p=0.020); CAR_E=-0.0201 (p=0.225)
 2026-11-27,Q2,CAR_D_0_10 ~ cut_vs_norm (early cuts),"Early cuts, publisher FE, HC1",coef=-0.0196; se=0.1096; p=0.858; n=43
+2026-11-27,Q3,primary_cost_20bps,Q3 summary row,trades=22; mean_net=-0.0551; median_net=-0.0678; t_stat=-2.1478; hit_rate=0.2273; mean_holding_days=39.8182
+2026-11-27,Q3,primary_cost_10bps,Q3 summary row,trades=22; mean_net=-0.0531; median_net=-0.0658; t_stat=-2.0699; hit_rate=0.2273; mean_holding_days=39.8182
+2026-11-27,Q3,primary_cost_40bps,Q3 summary row,trades=22; mean_net=-0.0591; median_net=-0.0718; t_stat=-2.3036; hit_rate=0.2273; mean_holding_days=39.8182
+2026-11-27,Q3,strict_flag,Q3 summary row,trades=18; mean_net=-0.0718; median_net=-0.0599; t_stat=-2.9669; hit_rate=0.2222; mean_holding_days=41.3889
+2026-11-27,Q3,tentpole_a_only,Q3 summary row,trades=9; mean_net=-0.1125; median_net=-0.0754; t_stat=-5.0707; hit_rate=0.0000; mean_holding_days=39.5556
+2026-11-27,Q3,placebo_random,Q3 summary row,trades=22; mean_net=-0.0551; placebo_mean=0.0304; placebo_p=0.9970
+2026-11-27,Q3,placebo_same_month,Q3 summary row,trades=22; mean_net=-0.0551; placebo_mean=0.1542; placebo_p=1.0000
+2026-11-27,Q3,q2_month_placebo,Q2 10-day AR vs same-month random dates,actual=-0.0213; placebo_mean=-0.0093; p_low=0.105; n=66
