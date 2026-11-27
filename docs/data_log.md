@@ -29,3 +29,4 @@
 
 ## Earnings announcement dates
 - Capcom: 44 announcements (2016-01-28 to 2026-10-27), collected from Capcom IR calendar archive pages and press releases (capcom.co.jp blocks scripts, so dates were gathered via web search of those pages). Releases came after the Tokyo close (15:20 JST observed) before 2024-11-05; the 8 later releases need their time checked against the 15:30 close. Consistent with returns: the three largest Capcom up-days (2019-08-02, 2023-07-27, 2026-07-29) each follow a Q1 release by one trading day.
+- Square Enix: 44 announcements (2016-02-04 to 2026-11-11), from the IR calendar page (hd.square-enix.com/eng/ir/calendar.html) plus the 2016-02-04 press release. Fiscal years labeled by start year, as for Capcom. Large next-day moves after releases (2020-08-07, 2020-11-09, 2023-08-07, 2024-05-14) are consistent with after-close timing. Largest move, +16.1% on 2025-04-30, is not an earnings date.
